@@ -1,0 +1,25 @@
+.splash-screen {
+	height: 100vh;
+}
+
+.splash-content {
+	padding: 5rem 0;
+}
+
+.logo-container {
+	margin-bottom: 1rem;
+	margin-top: 2rem;
+}
+
+.logo {
+	width: 150px;
+}
+
+.title {
+	color: #5ac0ab;
+	margin-bottom: 10px;
+}
+
+.subtitle {
+	color: #888;
+}

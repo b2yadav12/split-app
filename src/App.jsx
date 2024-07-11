@@ -1,9 +1,12 @@
-import { Button } from 'antd';
+import { Layout } from "antd";
+import SplashScreen from './components/Splash/splash';
 
 const App = () => (
-  <div className="App">
-    <Button type="primary">Button</Button>
-  </div>
+  <Layout>
+    <div>
+      <SplashScreen />
+    </div>
+  </Layout>
 );
 
 export default App;
