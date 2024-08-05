@@ -1,14 +1,6 @@
-.splash-screen {
-	height: 100vh;
-}
-
-.splash-content {
-	padding: 5rem 0;
-}
-
 .logo-container {
-	margin-bottom: 1rem;
-	margin-top: 2rem;
+	margin-bottom: auto;
+	margin-top: auto;
 }
 
 .logo {
