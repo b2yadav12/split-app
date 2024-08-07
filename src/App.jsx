@@ -1,11 +1,12 @@
 import { Layout } from "antd";
-import SplashScreen from './components/Splash/splash';
+import { BrowserRouter } from "react-router-dom";
+import { Pages } from './pages/routes';
 
 const App = () => (
   <Layout>
-    <div>
-      <SplashScreen />
-    </div>
+    <BrowserRouter basename="/split-app">
+      <Pages />
+    </BrowserRouter>
   </Layout>
 );
 

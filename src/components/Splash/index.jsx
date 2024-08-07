@@ -1,10 +1,8 @@
 import React from 'react';
-import { Flex, Layout, Typography } from 'antd';
+import { Flex } from 'antd';
 import SvgLogo from "../../icons/logo";
 import './style.css';
 
-const { Content } = Layout;
-const { Title, Text } = Typography;
 
 const SplashScreen = () => {
   return (
