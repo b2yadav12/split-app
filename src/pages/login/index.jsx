@@ -6,26 +6,20 @@ const { Option } = Select;
 
 const Login = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white shadow-md rounded-lg overflow-hidden max-w-sm w-full p-6">
+    <div className="flex items-center justify-center bg-gray-100">
+      <div className="bg-white shadow-md rounded-lg overflow-hidden w-full p-6">
         <div className="text-center">
           <Image
             localPath={`logo.png`}
-            alt="Taxify Logo"
-            className="mx-auto mb-4" />
-          <h2 className="text-2xl font-semibold text-gray-800">Let's you in</h2>
-          <p className="text-gray-500 mt-1">Hey, You have been missed!</p>
+            alt="Hisab"
+            className="mx-auto mb-4 max-h-32" />
         </div>
+        <h2 className="text-xl font-semibold text-gray-950">Let's you in</h2>
 
         <Form className="mt-6">
           <Form.Item>
             <Input.Group compact>
-              <Select defaultValue="+1" className="w-1/4">
-                <Option value="+1">+1</Option>
-                <Option value="+91">+91</Option>
-                {/* Add more options as needed */}
-              </Select>
-              <Input className="w-3/4" placeholder="Enter your number" />
+              <Input className="w-100 p-3.5" placeholder="Enter your number" />
             </Input.Group>
           </Form.Item>
 

@@ -2,11 +2,12 @@
 export default {
   content: [
     './src/**/*.{html,js,jsx}',
+    "node_modules/antd/dist/antd.css",
   ],
   theme: {
     extend: {
       colors: {
-        b2: '#0ea5e9', // Replace with your desired color value
+        primary: '#eb2f96',
       },
     },
   },
