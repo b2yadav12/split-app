@@ -12,7 +12,7 @@ const Login = () => {
           <Image
             localPath={`logo.png`}
             alt="Hisab"
-            className="mx-auto mb-4 max-h-32" />
+            className="mx-auto mb-4 max-h-16" />
         </div>
         <h2 className="text-xl font-semibold text-gray-950">Let's you in</h2>
 
