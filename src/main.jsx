@@ -7,7 +7,7 @@ import './index.css'
 
 const theme = {
   token: {
-    colorPrimary: tailwindColors.slate[950],
+    colorPrimary: tailwindColors.primary,
   },
 };
 

@@ -7,9 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#eb2f96',
-      },
+        primary: '#171C26',
+        bgPrimary: "#F3F4F6"
+      }
     },
+    borderRadius: {
+      'lg': '1.25rem',
+    }
   },
   plugins: [],
 }
