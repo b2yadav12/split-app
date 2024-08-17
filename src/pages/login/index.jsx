@@ -23,8 +23,8 @@ const Login = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form, formValues]);
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
+  const onFinish = () => {
+    console.log('Data:', formValues);
     navigate('/dashboard');
   }
 
