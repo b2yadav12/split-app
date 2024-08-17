@@ -15,10 +15,10 @@ const Login = () => {
     form
       .validateFields({ validateOnly: true })
       .then((res) => {
-        setIsDisabled(res.errorFields?.length === 0);
+        setIsDisabled(!!res.errorFields?.length);
       })
       .catch((res) => {
-        setIsDisabled(res.errorFields?.length !== 0);
+        setIsDisabled(!!res.errorFields?.length);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form, formValues]);
@@ -53,7 +53,7 @@ const Login = () => {
               />
             </FormItem>
 
-            <Form.Item
+            <FormItem
               name="password"
               className="req"
               label="Password"
@@ -66,7 +66,7 @@ const Login = () => {
                 type="password"
                 placeholder="Password"
               />
-            </Form.Item>
+            </FormItem>
 
             <FormItem>
               <Button onClick={onFinish} disabled={isDisabled} type="primary" block className="bg-black mt-4">
