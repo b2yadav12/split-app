@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import SplashScreen from '../components/Splash';
 import { AppLayout } from "../components";
 
@@ -10,7 +10,7 @@ const AppPages = () => {
   return (
     <AppLayout>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </AppLayout>
   );
@@ -19,9 +19,9 @@ const AppPages = () => {
 export const Pages = () => {
   return <Suspense fallback={<SplashScreen />}>
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Login />} />
       <Route path="/signup" element={<Login />} />
-      <Route path="/" element={<AppPages />} />
+      <Route path="/*" element={<AppPages />} />
     </Routes>
   </Suspense>;
 };
