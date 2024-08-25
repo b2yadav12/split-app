@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Flex, Form, Button, Input as AInput } from 'antd';
+import { Flex, Form, Button, Input as AInput, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { Image } from "../../components";
 import { FormItem, Input } from "../../components/Antd";
+import { login } from "../../services/users";
 
 const Login = () => {
   const [form] = Form.useForm();
   const formValues = Form.useWatch([], form);
   const navigate = useNavigate();
-
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
@@ -23,9 +23,14 @@ const Login = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form, formValues]);
 
-  const onFinish = () => {
-    console.log('Data:', formValues);
-    navigate('/dashboard');
+  const onFinish = async () => {
+    const { mobile, password } = formValues;
+    try {
+      await login({ email: mobile, password });
+      navigate('/dashboard');
+    } catch (error) {
+      message.error(error.message);
+    }
   }
 
   return (
