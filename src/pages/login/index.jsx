@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Flex, Form, Button, Input as AInput, message } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { Image } from "../../components";
 import { FormItem, Input } from "../../components/Antd";
-import { loginThunk } from "../../services/auth";
+import { loginThunk, loginPageOpened } from "../../services/auth";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -12,12 +12,32 @@ const Login = () => {
   const formValues = Form.useWatch([], form);
   const navigate = useNavigate();
   const [isDisabled, setIsDisabled] = useState(true);
+  const [redirectPath, setRedirectPath] = useState("");
+  const location = useLocation();
+  const messageShownRef = useRef(false);
 
-  const rState = useSelector((state) => state);
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    console.log("Redux State", rState)
-  }, [rState]);
+    dispatch(loginPageOpened());
+  }, []);
+
+  useEffect(() => {
+    if (auth.isLoggedIn) {
+      navigate(redirectPath || '/dashboard');
+    }
+  }, [auth.isLoggedIn]);
+
+  useEffect(() => {
+    if(!messageShownRef.current && location.search && location.search.startsWith("?redirect-to=")) {
+      messageShownRef.current = true;
+      const redirectPath = location.search.replace("?redirect-to=", "");
+      setRedirectPath(redirectPath);
+      message.error("Please login to continue");
+
+      navigate("/");
+    }
+  }, [location.search]);
 
   useEffect(() => {
     form
@@ -32,13 +52,9 @@ const Login = () => {
   }, [form, formValues]);
 
   const onFinish = async () => {
-    try {
-      const action = await dispatch(loginThunk({ email: formValues.mobile, password: formValues.password }));
-      if (loginThunk.fulfilled.match(action)) {
-        navigate('/dashboard');
-      }
-    } catch (error) {
-      message.error(error.message);
+    const action = await dispatch(loginThunk({ email: formValues.mobile, password: formValues.password }));
+    if(action.error) {
+      message.error(action.error.message);
     }
   }
 

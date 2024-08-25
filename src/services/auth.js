@@ -19,8 +19,8 @@ const saveAuth = (authDtl) => {
   localStorage.setItem('auth', JSON.stringify(authDtl));
 }
 
-const removeAuth = () => {
-  localStorage.removeItem('auth');
+export const clearLocalStoarge = () => {
+  localStorage.clear();
 }
 
 export const loginThunk = createAsyncThunk(
@@ -33,18 +33,25 @@ export const loginThunk = createAsyncThunk(
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: getInitialState(),
+  initialState: {
+    ...getInitialState(),
+    redirectToLogin: false,
+  },
   reducers: {
     logout: (state) => {
-      removeAuth();
+      clearLocalStoarge();
       state.user = null;
+      state.redirectToLogin = true;
       state.isLoggedIn = false;
     },
+    loginPageOpened: (state) => {
+      state.redirectToLogin = false;
+    }
   },
   extraReducers: (builder) => {
     builder
       .addCase(loginThunk.pending, (state) => {
-        removeAuth();
+        clearLocalStoarge();
         state.user = null;
         state.isLoggedIn = false;
       })
@@ -57,4 +64,6 @@ const authSlice = createSlice({
   },
 });
 
+export const logout = authSlice.actions.logout;
+export const loginPageOpened = authSlice.actions.loginPageOpened;
 export default authSlice.reducer;

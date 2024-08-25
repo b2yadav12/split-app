@@ -1,29 +1,36 @@
 import { Flex } from "antd";
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { AppstoreOutlined, MailOutlined, LogoutOutlined } from '@ant-design/icons';
+import { Link, useNavigate} from 'react-router-dom';
+import { useDispatch } from "react-redux";
 import Image from "../../Image";
 import Drawer from "../../Antd/Drawer";
 import Menu from "../../Antd/Menu";
-
-const items = [
-  {
-    key: 'sub1',
-    icon: <MailOutlined />,
-    label: 'Navigation One',
-  },
-  {
-    key: 'sub2',
-    icon: <AppstoreOutlined />,
-    label: 'Navigation Two',
-  },
-  {
-    key: 'sub4',
-    label: 'Navigation Three',
-    icon: <SettingOutlined />,
-  },
-];
+import { logout } from "../../../services/auth";
 
 const Leftbar = ({ collapsed, setCollapsed }) => {
+  const dispatch = useDispatch();
+
+  const items = [
+    {
+      key: 'sub1',
+      icon: <MailOutlined />,
+      label: 'Navigation One',
+    },
+    {
+      key: 'sub2',
+      icon: <AppstoreOutlined />,
+      label: 'Navigation Two',
+    },
+    {
+      key: 'logout',
+      label: 'Logout',
+      icon: <LogoutOutlined />,
+      onClick: () => {
+        dispatch(logout());
+      },
+    },
+  ];
+
   return (
     <Drawer
       placement="left"

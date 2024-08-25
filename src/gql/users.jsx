@@ -16,3 +16,16 @@ export const USER_LOGIN = gql`
     }
   }
 `;
+
+export const USERS_LISTS = gql`
+  query($status: Boolean) {
+    getUsers(status: $status) {
+      id
+      name
+      email
+      mobile
+      status
+      createdAt
+    }
+  }
+`;
