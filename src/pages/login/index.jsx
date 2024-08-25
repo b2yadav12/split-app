@@ -1,15 +1,23 @@
 import { useState, useEffect } from 'react';
 import { Flex, Form, Button, Input as AInput, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 import { Image } from "../../components";
 import { FormItem, Input } from "../../components/Antd";
-import { login } from "../../services/users";
+import { loginThunk } from "../../services/auth";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
   const formValues = Form.useWatch([], form);
   const navigate = useNavigate();
   const [isDisabled, setIsDisabled] = useState(true);
+
+  const rState = useSelector((state) => state);
+
+  useEffect(() => {
+    console.log("Redux State", rState)
+  }, [rState]);
 
   useEffect(() => {
     form
@@ -24,10 +32,11 @@ const Login = () => {
   }, [form, formValues]);
 
   const onFinish = async () => {
-    const { mobile, password } = formValues;
     try {
-      await login({ email: mobile, password });
-      navigate('/dashboard');
+      const action = await dispatch(loginThunk({ email: formValues.mobile, password: formValues.password }));
+      if (loginThunk.fulfilled.match(action)) {
+        navigate('/dashboard');
+      }
     } catch (error) {
       message.error(error.message);
     }
