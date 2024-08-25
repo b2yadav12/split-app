@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client';
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, App as AntdApp } from 'antd';
 import { ApolloProvider } from '@apollo/client';
 import { Provider } from 'react-redux';
 import { httpClient } from './apolloClient';
@@ -18,11 +18,13 @@ const theme = {
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ConfigProvider theme={theme}>
-      <ApolloProvider client={httpClient}>
+      <AntdApp>
         <Provider store={store}>
-          <App />
+          <ApolloProvider client={httpClient}>
+            <App />
+          </ApolloProvider>
         </Provider>
-      </ApolloProvider>
+      </AntdApp>
     </ConfigProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

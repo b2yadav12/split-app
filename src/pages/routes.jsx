@@ -2,13 +2,14 @@ import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes, Navigate, useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SplashScreen from '../components/Splash';
-import { AppLayout } from "../components";
+import { AppLayout, FullPageLoader } from "../components";
 
 const Login = lazy(() => import("./login/index"));
 const Dashboard = lazy(() => import("./dashboard/index"));
 
 const AppPages = () => {
   const auth = useSelector((state) => state.auth);
+  const { isLoading } = useSelector((state) => state.common);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -26,6 +27,7 @@ const AppPages = () => {
 
   return (
     <AppLayout>
+      {isLoading && <FullPageLoader />}
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>

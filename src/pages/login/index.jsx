@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Image } from "../../components";
 import { FormItem, Input } from "../../components/Antd";
 import { loginThunk, loginPageOpened } from "../../services/auth";
+import { showLoader } from "../../services/common";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -52,7 +53,9 @@ const Login = () => {
   }, [form, formValues]);
 
   const onFinish = async () => {
+    dispatch(showLoader(true));
     const action = await dispatch(loginThunk({ email: formValues.mobile, password: formValues.password }));
+    dispatch(showLoader(false));
     if(action.error) {
       message.error(action.error.message);
     }
