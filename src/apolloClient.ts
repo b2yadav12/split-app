@@ -15,6 +15,7 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       authorization: token ? `Bearer ${token}` : "",
+      'Accept-Encoding': 'gzip'
     },
   };
 });
